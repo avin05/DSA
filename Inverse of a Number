@@ -1,0 +1,27 @@
+public class Main{
+
+public static int inverse(int n){
+    int temp = n;
+    int count =0;
+    while(n>0){
+        int dig = n%10;
+        count++;
+        n=n/10;
+    }
+    int inverse =0;
+    int p =1;
+    for(int i=1;i<=count;i++){
+        int rem = temp%10;
+        inverse = inverse+p*(int)Math.pow(10,rem-1);
+        temp=temp/10;
+        p++;
+    }
+    return inverse;
+}
+public static void main(String[] args) {
+  // write your code here  
+  Scanner sc =new Scanner(System.in);
+  int n = sc.nextInt();
+  System.out.println(inverse(n));
+ }
+}
