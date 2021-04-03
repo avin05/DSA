@@ -1,0 +1,18 @@
+   public class Main{
+    
+    public static void main(String[] args) {
+      // write your code here
+      Scanner sc = new Scanner(System.in);
+      int n = sc.nextInt();
+      int temp = n,count=0;
+      while(temp>0){
+          count++;
+          temp=temp/10;
+      }
+      double num = Math.pow(10,count-1);
+      int j = (int)num;
+      for(;j>0;j/=10){
+          System.out.println(n/j%10);
+      }
+     }
+    }
