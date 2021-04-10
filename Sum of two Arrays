@@ -7,69 +7,50 @@ public static void main(String[] args) throws Exception {
     // write your code here
     Scanner sc = new Scanner(System.in);
     
-    int n1 = sc.nextInt();
-    int arr1[] = new int[n1];
+    int n1=sc.nextInt();
+    int arr1[]=new int[n1];
     for(int i=0;i<n1;i++){
         arr1[i]=sc.nextInt();
     }
-    
-    int n2 = sc.nextInt();
+    int n2=sc.nextInt();
     int arr2[]=new int[n2];
     
     for(int j=0;j<n2;j++){
         arr2[j]=sc.nextInt();
     }
-    int max= Math.max(n1,n2);
-    int res[]=new int[max];
     
-    if(n1>=n2){
-        for(int i=0;i<n1;i++){
-            res[i]=arr1[i];
-        }
-    
-        int carry=0;
-        for(int j=n2-1;j>=0;j--){
-            int sum = arr2[j]+res[j];
-            if(sum>9){
-                res[j]=sum%10 + carry;
-                carry=sum/10;
-            }
-            else{
-                res[j]=sum;
-            }
-        }
-    }
-    else{
-            for(int i=0;i<n2;i++){
-            res[i]=arr2[i];
-        }
-        
-        int carry=0;
-        for(int j=n1-1;j>=0;j--){
-            int sum = arr1[j]+res[j];
-            if(sum>9){
-                res[j]=sum%10 + carry;
-                carry=sum/10;
-            }
-            else{
-                res[j]=sum;
-            }
-        }
-    }
-    
-    for(int i=0;i<max;i++){
-        System.out.println(res[i]);
-    }
-        
-    
-    
+   int sum[]= new int[n1>n2?n1:n2];
+   int c=0;
+   int i=n1-1;
+   int j=n2-1;
+   int k=sum.length-1;
    
-                
-            
-            
+   while(k>=0){
+       int d =c;
        
-        
-    
+       if(i>=0){
+           d+=arr1[i];
+           i--;
+       }
+       
+       if(j>=0){
+           d+=arr2[j];
+           j--;
+       }
+       
+       c=d/10;
+       d=d%10;
+       
+       sum[k--]=d;
+       
+   }
+  if(c!=0){
+      System.out.println(c);
+  }
+  
+  for(int val:sum){
+      System.out.println(val);
+  }
  }
 
 }
