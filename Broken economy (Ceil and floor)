@@ -1,0 +1,46 @@
+import java.io.*;
+import java.util.*;
+
+public class Main{
+public static void fun(int[] arr,int n,int d){
+    int ceil=0,floor=0,low=0,high=n-1;
+    
+    while(low<=high){
+       int mid= low +(high-low)/2;
+        
+        if(arr[mid] == d){
+            ceil=arr[mid];
+            floor=arr[mid];
+            break;
+        }
+        else if(arr[mid]<d){
+            low=mid+1;
+            floor=arr[mid];
+        }
+        else{
+            high=mid-1;
+            ceil=arr[mid];
+        }
+    
+        
+    }
+    System.out.println(ceil);
+    System.out.println(floor);
+    
+}
+public static void main(String[] args) throws Exception {
+    // write your code here
+    Scanner sc = new Scanner(System.in);
+    
+    int n =sc.nextInt();
+    int arr[]=new int[n];
+    
+    for(int i=0;i<n;i++){
+        arr[i]=sc.nextInt();
+    }
+    int d = sc.nextInt();
+    
+    fun(arr,n,d);
+ }
+
+}
