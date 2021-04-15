@@ -17,14 +17,12 @@ public class Main {
         if(n == 0){
             return 1;
         }
-        int t=n/2;
-        if(n%2==0){
-            
-            return power(x,t)*power(x,t);
-        }
-        else{
-            return x*power(x,t)*power(x,t);
-        }
+        int halfPower = power(x,n/2);
+        
+        int xn = halfPower*halfPower;
+        
+        return n%2==0?xn:xn*x;
+      
     }
 
 }
