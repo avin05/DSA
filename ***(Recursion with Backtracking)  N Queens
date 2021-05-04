@@ -47,3 +47,76 @@ public class Main {
         return true;
     }
 }
+
+
+
+
+-----------------------------------------------Similar Approach with dir array --------------------------------------------------------------------------------
+
+
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[][] chess = new int[n][n];
+        printNQueens(chess,0,0,0,"");
+        
+    }
+    
+    public static boolean isValid(int[][] chess,int r,int c){
+        int[][] dir = {{-1,0},{-1,1},{-1,-1}};
+        int radius = chess.length;
+        
+        for(int i=1;i<radius;i++){
+            for(int d =0;d<dir.length;d++){
+                int rr = r +(i * dir[d][0]);
+                int cc = c +(i * dir[d][1]);
+                
+                if(rr>=0 && rr<radius && cc>=0 && cc<radius){
+                    if(chess[rr][cc] == 1)
+                        return false;
+                }
+            }
+        }
+        
+        return true;
+    }
+
+    public static void printNQueens(int[][] chess,int sr,int sc,int qsf, String asf) {
+        
+        if(sr == chess.length){
+            if(qsf == chess.length){
+                System.out.println(asf+".");
+            }
+            return;
+        }
+        
+        
+        if(sc+1<chess[0].length){
+            
+            if(isValid(chess,sr,sc)){
+                chess[sr][sc]=1;
+                printNQueens(chess,sr+1,0,qsf+1,asf+sr+"-"+sc+", ");
+                chess[sr][sc]=0;
+            }
+            
+            printNQueens(chess,sr,sc+1,qsf,asf);
+        }
+        
+        else{
+                if(isValid(chess,sr,sc)){
+                chess[sr][sc]=1;
+                printNQueens(chess,sr+1,0,qsf+1,asf+sr+"-"+sc+", ");
+                chess[sr][sc]=0;
+                }
+            
+            printNQueens(chess,sr+1,0,qsf,asf);
+        }
+            
+        
+    }
+}
