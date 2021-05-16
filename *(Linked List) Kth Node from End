@@ -1,0 +1,16 @@
+ public int kthFromLast(int k){
+      // write your code here
+      Node p1=head;
+      Node p2 =head;
+      int count=0;
+      while(count<=k){
+         
+          p1=p1.next;
+          count++;
+      }
+      while(p1!=null){
+          p2=p2.next;
+          p1=p1.next;
+      }
+      return p2.data;
+    }
