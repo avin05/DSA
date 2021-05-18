@@ -1,0 +1,20 @@
+public void removeDuplicates(){
+      // write your code here
+      
+      
+      Node temp = this.head;
+      Node itr = temp.next;
+      
+      while(itr!=null){
+          if(temp.data == itr.data){
+              itr=itr.next;
+          }
+          else{
+              temp.next = itr;
+              temp = temp.next;
+              itr = itr.next;
+          }
+      }
+      temp.next = itr;
+      
+    }
