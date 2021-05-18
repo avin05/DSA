@@ -1,0 +1,33 @@
+----------------------------(Using Extra Space)---------------------------------
+
+ public static LinkedList mergeTwoSortedLists(LinkedList l1, LinkedList l2) {
+            // write your code hered
+            
+            Node temp1 = l1.head;
+            Node temp2 = l2.head;
+            
+            LinkedList ans = new LinkedList();
+            
+            while(temp1!=null && temp2!=null){
+                if(temp1.data<=temp2.data){
+                    ans.addLast(temp1.data);
+                    temp1=temp1.next;
+                    
+                }
+                else{
+                    ans.addLast(temp2.data);
+                    temp2=temp2.next;
+                }
+            }
+            
+            while(temp1!=null){
+                ans.addLast(temp1.data);
+                temp1=temp1.next;
+            }
+             while(temp2!=null){
+                ans.addLast(temp2.data);
+                temp2=temp2.next;
+            }
+            
+            return ans;
+        }
