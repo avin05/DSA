@@ -1,0 +1,84 @@
+--------------------Approach 1 Using 2 Queues --------------------------------------
+
+ public static void levelOrderLinewise(Node node){
+    // write your code here
+    
+    Queue<Node> mainQ = new ArrayDeque<>();
+    Queue<Node> childQ = new ArrayDeque<>();
+    
+    mainQ.add(node);
+    
+    while(mainQ.size()>0){
+        Node rem = mainQ.remove();
+        System.out.print(rem.data+" ");
+        
+        for(Node child: rem.children){
+            childQ.add(child);
+        }
+        
+        if(mainQ.size() == 0){
+            System.out.println();
+            Queue<Node> temp = mainQ;
+            mainQ=childQ;
+            childQ=temp;
+        }
+    }
+   
+   
+-------------------------Approach 2 Delimiter(Using 1 Queue)--------------------------------
+
+ public static void levelOrderLinewise(Node node){
+    // write your code here
+    
+    Queue<Node> q = new LinkedList<>();
+    q.add(node);
+    q.add(null);
+    
+    while(q.size()>0){
+        Node rem = q.remove();
+        
+        if(rem == null){
+            System.out.println();
+            if(q.size()>0){
+                q.add(null);
+            }
+        }
+        else{
+            System.out.print(rem.data+" ");
+            for(Node child: rem.children){
+                q.add(child);
+            }
+        }
+    }
+    
+
+    }
+    
+    
+ ----------------------------------- Size Approach(Kinda Best)-------------------------------------------
+ 
+ public static void levelOrderLinewise(Node node){
+    // write your code here
+    
+    Queue<Node> q = new LinkedList<>();
+    q.add(node);
+   
+    while(q.size()>0){
+        int sz = q.size();
+        
+        while(sz-->0){
+            Node rem = q.remove();
+            
+            System.out.print(rem.data+" ");
+            
+            for(Node child: rem.children){
+                q.add(child);
+            }
+        }
+        System.out.println();
+        sz=q.size();
+    }
+    
+
+    }
+  
