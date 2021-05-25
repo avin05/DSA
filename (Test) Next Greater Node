@@ -1,0 +1,100 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+  	public static class Node {
+    	int data;
+      	Node next;
+      
+      	Node() {
+        	
+        }
+      	
+      	Node(int data,Node next) {
+        	this.data = data;
+          	this.next = next;
+        }
+    }
+    public static int size(Node head){
+        int count=0;
+        Node temp = head;
+        while(temp!=null){
+            count++;
+            temp=temp.next;
+        }
+        return count;
+    }
+    
+  	public static int[] nextGreaterNode(Node head) {
+    	/* write your code here */
+        
+        int n = size(head);
+        int[] res = new int[n];
+        Stack<Node> st = new Stack<>();
+        
+        
+      int j = n-1; 
+      Node curr =head;
+      Node prev = null;
+      Node next=null;
+      while(curr!=null){
+          
+          next = curr.next;
+          curr.next=prev;
+          prev=curr;
+          curr=next;
+      }
+      
+      head=prev;
+        Node pre = null;
+        Node temp = head;
+        
+        while(temp!=null){
+             if(st.isEmpty()){
+                res[j--]=0;
+                st.push(temp);
+            }
+            
+            else if(st.peek().data > temp.data){
+                res[j--] = st.peek().data;
+                st.push(temp);
+            }
+            
+            else if(st.peek().data <= temp.data){
+                st.pop();
+                temp=pre;
+            }
+            pre = temp;
+            temp=temp.next;
+        }
+      	return res;
+    }
+
+    public static void main(String[] args) {
+        Scanner scn = new Scanner(System.in);
+        int n = scn.nextInt();
+
+        Node head = null;
+        Node tail = null;
+
+        for(int i=0;i < n;i++) {
+            int val = scn.nextInt();
+            Node node = new Node(val,null);
+
+            if(i == 0) {
+                head = tail = node;
+            }
+            else {
+                tail.next = node;
+                tail = node;
+            }
+        }
+
+        int[]ans = nextGreaterNode(head);
+      	
+      	for(int i=0; i < ans.length; i++) {
+        	System.out.print(ans[i] + " ");
+        }
+      	
+    }
+}
