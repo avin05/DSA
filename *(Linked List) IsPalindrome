@@ -21,4 +21,89 @@
     
     -------------O(n) Solution----------------------------
     
+    import java.io.*;
+import java.util.*;
+
+public class Solution {
+  	public static class Node {
+    	int data;
+      	Node next;
+      
+      	Node() {
+        	
+        }
+      	
+      	Node(int data,Node next) {
+        	this.data = data;
+          	this.next = next;
+        }
+    }
+    public static Node reverse(Node cur)
+{
+    Node next=null;
+    Node prev = null;
+    while(cur!=null)
+    {
+        next=cur.next;
+        cur.next=prev;
+        prev=cur;
+        cur=next;
+    }
+    return prev;
+}
+    
+  	public static boolean isPalindrome(Node head) {
+    	/* write your code here */
+        
+      Node fast=head;
+      Node slow=head;
+    
+    while(fast!=null && fast.next!=null)
+    {
+        slow=slow.next;
+        fast=fast.next.next;
+    }
+    if(fast!=null)
+        slow=slow.next;
+    Node nhead=reverse(slow);
+    Node temp=nhead;
+    Node temp1=head;
+    
+        while(temp!=null)
+        {
+            if(temp.data!=temp1.data)
+                return false;
+            temp=temp.next;
+            temp1=temp1.next;
+        }
+ 
+    return true;
+        
+        
+      	
+    }
+
+    public static void main(String[] args) {
+        Scanner scn = new Scanner(System.in);
+        int n = scn.nextInt();
+
+        Node head = null;
+        Node tail = null;
+
+        for(int i=0;i < n;i++) {
+            int val = scn.nextInt();
+            Node node = new Node(val,null);
+
+            if(i == 0) {
+                head = tail = node;
+            }
+            else {
+                tail.next = node;
+                tail = node;
+            }
+        }
+
+        System.out.println(isPalindrome(head));
+    }
+}
     
