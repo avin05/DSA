@@ -1,0 +1,18 @@
+ public static void mirror(Node node){
+    // write your code here
+    for(Node child: node.children){
+        mirror(child);
+    }
+    //reverse chidren of current node
+    
+    int left =0;
+    int right = node.children.size()-1;
+    
+    while(left<right){
+        Node temp = node.children.get(left);
+        node.children.set(left,node.children.get(right));
+        node.children.set(right,temp);
+        left++;
+        right--;
+    }
+  }
