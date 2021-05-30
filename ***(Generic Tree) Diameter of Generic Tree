@@ -1,0 +1,20 @@
+ public static int diameter =0;
+  public static int heightForDiameter(Node node){
+      int maxHt = -1;
+      int smaxHt = -1;
+      
+      for(Node child : node.children){
+          int ht = heightForDiameter(child);
+          
+          if(ht>=maxHt){
+              smaxHt = maxHt;
+              maxHt = ht;
+          }
+          else if(ht > smaxHt){
+              smaxHt = ht;
+          }
+      }
+      diameter = Math.max(diameter,maxHt+smaxHt+2);
+      
+      return maxHt+1;
+  }
