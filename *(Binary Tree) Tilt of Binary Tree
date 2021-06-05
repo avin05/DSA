@@ -1,0 +1,19 @@
+  static int tilt = 0;
+  public static int tilt(Node node){
+    // write your code here to set the tilt data member
+    if(node == null){
+        return 0;
+    }
+    
+    
+    int l =tilt(node.left);
+    int r = tilt(node.right);
+    
+    
+    int sum = Math.abs(l-r);
+    tilt+=sum;
+    int ns = l+r+node.data;
+    
+    return ns;
+    
+  }
