@@ -1,0 +1,36 @@
+----------------------------------O(n^2)---------------------------------------------
+
+public static int max(Node node) {
+    // write your code here
+    if(node == null){
+        return Integer.MIN_VALUE;
+    }
+    int lmax = max(node.left);
+    int rmax = max(node.right);
+    
+    return Math.max(node.data,Math.max(lmax,rmax));
+  }
+  
+   public static int min(Node node) {
+    // write your code here
+    if(node == null){
+        return Integer.MAX_VALUE;
+    }
+    int lmin = min(node.left);
+    int rmin = min(node.right);
+    
+    return Math.min(node.data,Math.min(lmin,rmin));
+  }
+  public static boolean isBST(Node node){
+        if(node == null)
+            return true;
+        
+        int lmax = max(node.left);
+        int rmin = min(node.right);
+        
+        if(lmax > node.data || rmin <node.data)
+            return false;
+            
+        return isBST(node.left) && isBST(node.right);
+     
+  }
