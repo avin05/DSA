@@ -1,0 +1,49 @@
+-------------------------------- O(n^2)--------------------------
+
+ public static int height(Node node) {
+    if (node == null) {
+      return -1;
+    }
+
+    int lh = height(node.left);
+    int rh = height(node.right);
+
+    int th = Math.max(lh, rh) + 1;
+    return th;
+  }
+  public static boolean isBalanced(Node node){
+      if(node == null)
+        return true;
+      
+      int lh = height(node.left);
+      int rh = height(node.right);
+      
+      if(Math.abs(lh-rh) >1 ){
+          return false;
+      }
+         
+       
+       
+    return isBalanced(node.left) && isBalanced(node.right);
+        
+  }
+  
+  -----------------------------O(n) Travel and change --------------------
+  
+  public static boolean isBal = true;
+  public static int isBalanced(Node node){
+      if(node == null)
+        return 0;
+      
+      int lh = isBalanced(node.left);
+      int rh = isBalanced(node.right);
+      
+      if(Math.abs(lh-rh) >1 ){
+          isBal = false;
+      }
+         
+       
+       
+    int th = Math.max(lh,rh)+1;
+    return th;
+  }
