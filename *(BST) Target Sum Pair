@@ -1,0 +1,32 @@
+public static boolean find(Node node,int data){
+      if(node == null){
+          return false;
+      }
+      
+      if(data>node.data){
+          return find(node.right,data);
+      }
+      else if(data<node.data){
+          return find(node.left,data);
+      }
+      else{
+          return true;
+      }
+  }
+  public static void pairSum(Node root,Node node,int target){
+      if(node == null){
+          return;
+      }
+      
+      pairSum(root,node.left,target);
+      int rest = target-node.data;
+      
+      if(node.data < rest){
+          if(find(root,rest)){
+              System.out.println(node.data+" "+rest);
+          }
+      }
+      
+      pairSum(root,node.right,target);
+      
+  }
