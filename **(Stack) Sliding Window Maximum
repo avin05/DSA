@@ -48,4 +48,59 @@ public static void main(String[] args) throws Exception {
     
     slidingWindow(a,k);
  }
+
+
+----------------------------------------------------------------------------------------------------
+
+import java.io.*;
+import java.util.*;
+
+public class Main{
+ public static int[] nextGR(int[] arr,int n){
+     int[] res = new int[n];
+     Stack<Integer> st = new Stack<>();
+     
+     for(int i= n-1;i>=0;i--){
+         if(st.isEmpty()){
+             res[i] = n;
+             st.push(i);
+         }
+         
+         else if(arr[i]>=arr[st.peek()]){
+             st.pop();
+             i++;
+         }
+         else if(arr[i]<arr[st.peek()]){
+             res[i] = st.peek();
+             st.push(i);
+         }
+     }
+     
+     return res;
+ }
+public static void solve(int[] arr,int n,int k){
+    int[] ngr = nextGR(arr,n);
+    
+    for(int i=0;i<=n-k;i++){
+        
+        int j=i;
+        while(i+k >ngr[j]){
+            j =ngr[j];
+        }
+        System.out.println(arr[j]);
+    }
+}
+public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    int n = Integer.parseInt(br.readLine());
+    int[] a = new int[n];
+    for(int i = 0; i < n; i++){
+       a[i] = Integer.parseInt(br.readLine());
+    }
+    int k = Integer.parseInt(br.readLine());
+
+    // code
+    solve(a,n,k);
+ }
 }
