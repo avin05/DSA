@@ -1,0 +1,77 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+   
+   public static class Edge{
+       int v;
+       int nbr;
+       
+       public Edge(int v,int nbr){
+           this.v=v;
+           this.nbr=nbr;
+       }
+   }
+
+   public static void main(String[] args) throws Exception {
+      BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+      int n = Integer.parseInt(br.readLine());
+      int k = Integer.parseInt(br.readLine());
+      
+      // write your code here
+      ArrayList<Edge>[] graph = new ArrayList[n];
+      
+      for(int i=0;i<n;i++){
+          graph[i] = new ArrayList<>();
+      }
+      
+      
+      for(int i=0;i<k;i++){
+          String line = br.readLine();
+          String[] parts = line.split(" ");
+          
+          int src = Integer.parseInt(parts[0]);
+          int nbr = Integer.parseInt(parts[1]);
+          
+          graph[src].add(new Edge(src,nbr));
+          graph[nbr].add(new Edge(nbr,src));
+          
+      }
+      int count = perfectFr(graph);
+          System.out.println(count);
+   }
+    public static void gcc(ArrayList<Edge>[] graph,int i,ArrayList<Integer> res,boolean[] visited){
+        visited[i] = true;
+        res.add(i);
+        for(Edge e: graph[i]){
+            if(visited[e.nbr] == false){
+                gcc(graph,e.nbr,res,visited);
+            }
+        }
+    }
+   public static int perfectFr(ArrayList<Edge>[] graph){
+       ArrayList<ArrayList<Integer>> comps = new ArrayList<>();
+       
+       int n = graph.length;
+       boolean[] vis = new boolean[n];
+       
+       for(int v=0;v<n;v++){
+           if(vis[v]==false){
+               ArrayList<Integer> comp = new ArrayList<>();
+               gcc(graph,v,comp,vis);
+               comps.add(comp);
+           }
+       }
+       int count=0;
+       int sum = comps.get(comps.size()-1).size();
+       
+       for(int i=comps.size()-2;i>=0;i--){
+           int s = comps.get(i).size();
+           count+=sum*s;
+           sum+=s;
+       }
+       return count;
+   }
+
+}
