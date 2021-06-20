@@ -25,7 +25,11 @@ public class Main {
            
        }
        public int compareTo(DPair o){
-           return this.wsf-o.wsf;
+           //return this.wsf-o.wsf;
+           if(this.wsf-o.wsf!=0){
+           return this.wsf-o.wsf;}
+           else{
+           return this.psf.length()-o.psf.length();}
        }
    }
    
