@@ -1,0 +1,135 @@
+--------------------Recursion-----------------------
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    
+    public static int stairs(int i,int n,int[] moves){
+        if(i==n)
+            return 1;
+            
+        int count=0;
+        
+        for(int j=1;j<=moves[i]&&j+i<=n;j++){
+            count+=stairs(i+j,n,moves);
+        }
+        
+        return count;
+    }
+
+    public static void main(String[] args) throws Exception {
+        // write your code here
+        
+        Scanner sc = new Scanner(System.in);
+        int n =sc.nextInt();
+        int[] moves = new int[n];
+        
+        for(int i=0;i<n;i++){
+            moves[i]=sc.nextInt();
+        }
+        
+        int count=0;
+        
+        int i=0;
+        count =stairs(i,n,moves);
+        
+        
+        System.out.println(count);
+    }
+
+}
+
+-------------------DP Memoisation------------------------------------------
+
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    
+    public static int stairs(int i,int n,int[] moves,int[] dp){
+        if(i==n)
+            return dp[i]=1;
+        
+        if(dp[i]!=0){
+            return dp[i];
+        }
+        int count=0;
+        
+        for(int j=1;j<=moves[i]&&j+i<=n;j++){
+            count+=stairs(i+j,n,moves,dp);
+        }
+        
+        return dp[i]=count;
+    }
+
+    public static void main(String[] args) throws Exception {
+        // write your code here
+        
+        Scanner sc = new Scanner(System.in);
+        int n =sc.nextInt();
+        int[] moves = new int[n];
+        
+        for(int i=0;i<n;i++){
+            moves[i]=sc.nextInt();
+        }
+        
+        int count=0;
+        
+        int i=0;
+        int[] dp =new int[n+1];
+        count =stairs(i,n,moves,dp);
+        
+        
+        System.out.println(count);
+    }
+
+}
+
+---------------------DP Tabular ---------------------------------------------
+
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    
+    public static int stairs(int n,int[] moves,int[] dp){
+
+    for(int i =n;i>=0;i--){
+        if(i==n){
+            dp[i]=1;
+            continue;
+        }
+        
+        int count =0;
+        
+        for(int j=1;j<=moves[i]&&i+j<=n;j++){
+            count+=dp[i+j];
+        }
+        dp[i]=count;
+    }
+    
+    return dp[0];
+    }
+
+    public static void main(String[] args) throws Exception {
+        // write your code here
+        
+        Scanner sc = new Scanner(System.in);
+        int n =sc.nextInt();
+        int[] moves = new int[n];
+        
+        for(int i=0;i<n;i++){
+            moves[i]=sc.nextInt();
+        }
+        
+        int count=0;
+        
+        //int i=0;
+        int[] dp =new int[n+1];
+        count =stairs(n,moves,dp);
+        
+        
+        System.out.println(count);
+    }
+
+}
