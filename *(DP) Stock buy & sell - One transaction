@@ -1,0 +1,31 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    
+    public static int stock(int[] price){
+        
+        int profit = 0;
+        int minPrice = price[0];
+        for(int i=1;i<price.length;i++){
+            profit = Math.max(profit,price[i]-minPrice);
+            minPrice = Math.min(minPrice,price[i]);
+        }
+        
+        return profit;
+    }
+
+    public static void main(String[] args) throws Exception {
+        // write your code here
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] price = new int[n];
+        for(int i=0;i<n;i++){
+            price[i] = sc.nextInt();
+        }
+        
+        int ans = stock(price);
+        System.out.println(ans);
+    }
+
+}
