@@ -1,0 +1,23 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static int tiles(int n){
+        int a =1;
+        int b = 2;
+        
+        for(int i=1;i<n;i++){
+            int c=  a+b;
+            a=b;b=c;
+        }
+        return a;
+    }
+
+    public static void main(String[] args) throws Exception {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int ans = tiles(n);
+        System.out.println(ans);
+
+    }
+}
