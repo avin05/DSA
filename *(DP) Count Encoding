@@ -1,0 +1,141 @@
+-------------------------Recursion---------------------
+
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    
+    public static int count(String str,int idx){
+        if(idx == str.length()){
+            return 1;
+        }
+        
+        if(str.charAt(idx)=='0'){
+            return 0;
+        }
+        
+        int c=0;
+        
+        int n1 = str.charAt(idx)-'0';
+        
+        c+=count(str,idx+1);
+        
+        if(idx+1 <str.length()){
+            int n = str.charAt(idx+1)-'0';
+            int n2 = n1*10+n;
+            
+            if(n2<=26){
+                c+= count(str,idx+2);
+            }
+        }
+        
+        return c;
+    }
+
+    public static void main(String[] args) throws Exception {
+        
+        Scanner sc = new Scanner(System.in);
+        String str = sc.next();
+        
+        int ans = count(str,0);
+        System.out.println(ans);
+
+    }
+}
+
+---------------------Memoisation----------------------
+
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    
+    public static int count(String str,int idx,int[] dp){
+        if(idx == str.length()){
+            return dp[idx]=1;
+        }
+        
+        if(str.charAt(idx)=='0'){
+            return dp[idx]=0;
+        }
+        
+        int c=0;
+        
+        int n1 = str.charAt(idx)-'0';
+        
+        c+=count(str,idx+1,dp);
+        
+        if(idx+1 <str.length()){
+            int n = str.charAt(idx+1)-'0';
+            int n2 = n1*10+n;
+            
+            if(n2<=26){
+                c+= count(str,idx+2,dp);
+            }
+        }
+        
+        return dp[idx]=c;
+    }
+
+    public static void main(String[] args) throws Exception {
+        
+        Scanner sc = new Scanner(System.in);
+        String str = sc.next();
+        int[] dp = new int[str.length()+1];
+        int ans = count(str,0,dp);
+        System.out.println(ans);
+
+    }
+}
+
+-----------------Tabulation--------------------------
+
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    
+    public static int count(String str){
+        int[] dp = new int[str.length()+1];
+        
+        for(int idx = str.length();idx>=0;idx--){
+        if(idx == str.length()){
+             dp[idx]=1;
+             continue;
+        }
+        
+        if(str.charAt(idx)=='0'){
+            dp[idx]=0;
+            continue;
+        }
+        
+        int c=0;
+        
+        int n1 = str.charAt(idx)-'0';
+        
+        c+=dp[idx+1];
+        
+        if(idx+1 <str.length()){
+            int n = str.charAt(idx+1)-'0';
+            int n2 = n1*10+n;
+            
+            if(n2<=26){
+                c+= dp[idx+2];
+            }
+        }
+        dp[idx]=c;
+        }
+        return dp[0];
+
+    }
+
+    public static void main(String[] args) throws Exception {
+        
+        Scanner sc = new Scanner(System.in);
+        String str = sc.next();
+        
+        int ans = count(str);
+        System.out.println(ans);
+
+    }
+}
