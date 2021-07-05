@@ -1,0 +1,72 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    
+    public static int stock(int[] price){
+        
+        int mpist  =0;
+        int leastsf = price[0];
+        int[] dp = new int[price.length];
+        
+        for(int i=1;i<price.length;i++){
+            
+            if(price[i]<leastsf){
+                leastsf = price[i];
+            }
+            
+            mpist = price[i]-leastsf;
+            
+            if(mpist > dp[i-1]){
+                dp[i] =mpist;
+            }else{
+                dp[i] = dp[i-1];
+            }
+        }
+        
+        int mpibt  =0;
+        int maxat = price[price.length-1];
+        int[] dp1 = new int[price.length];
+        
+        for(int i=price.length-2;i>=0;i--){
+            
+            if(price[i]>maxat){
+                maxat = price[i];
+            }
+            
+            mpibt = maxat-price[i];
+            
+            if(mpibt > dp1[i+1]){
+                dp1[i]= mpibt;
+            }else{
+                dp1[i] = dp1[i+1];
+            }
+        }
+        
+        int op =0;
+        
+        for(int i=0;i<price.length;i++){
+            if(dp[i]+dp1[i]>op){
+                op = dp[i]+dp1[i];
+            }
+        }
+        
+        return op;
+     
+    }
+
+    public static void main(String[] args) throws Exception {
+        // write your code here
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] price = new int[n];
+        
+        for(int i=0;i<n;i++){
+            price[i] = sc.nextInt();
+        }
+        
+        int ans = stock(price);
+        System.out.println(ans);
+    }
+
+}
