@@ -1,0 +1,35 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    
+    public static int stock(int n,int[] price,int fee){
+        int pwb = -price[0];
+        int pws = 0;
+        
+        for(int i=1;i<n;i++){
+            int npwb = Math.max(pwb,pws-price[i]);
+            int npws = Math.max(pws,pwb+price[i]-fee);
+            
+            pwb = npwb;
+            pws = npws;
+        }
+        
+        return pws;
+    }
+
+    public static void main(String[] args) throws Exception {
+        // write your code here
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] price = new int[n];
+        for(int i=0;i<n;i++){
+            price[i]= sc.nextInt();
+        }
+        int fee = sc.nextInt();
+        
+        int ans = stock(n,price,fee);
+        System.out.println(ans);
+    }
+
+}
